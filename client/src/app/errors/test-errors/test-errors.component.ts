@@ -19,7 +19,7 @@ export class TestErrorsComponent implements OnInit {
     this.http.get(this.baseUrl + 'buggy/not-found').subscribe(response =>{
       console.log(response)
     }, error =>{
-      console.log(error)
+      console.error(error)
     })
   }
 
@@ -27,7 +27,7 @@ export class TestErrorsComponent implements OnInit {
     this.http.get(this.baseUrl + 'buggy/bad-request').subscribe(response =>{
       console.log(response)
     }, error =>{
-      console.log(error)
+      console.error(error)
     })
   }
 
@@ -35,7 +35,7 @@ export class TestErrorsComponent implements OnInit {
     this.http.get(this.baseUrl + 'buggy/server-error').subscribe(response =>{
       console.log(response)
     }, error =>{
-      console.log(error)
+      console.error(error)
     })
   }
 
@@ -43,7 +43,7 @@ export class TestErrorsComponent implements OnInit {
     this.http.get(this.baseUrl + 'buggy/auth').subscribe(response =>{
       console.log(response)
     }, error =>{
-      console.log(error)
+      console.error(error)
     })
   }
 
@@ -51,7 +51,7 @@ export class TestErrorsComponent implements OnInit {
     this.http.post(this.baseUrl + 'account/register',{}).subscribe(response =>{
       console.log(response)
     }, error =>{
-      console.log(error)
+      console.error(error)
     })
   }
 
