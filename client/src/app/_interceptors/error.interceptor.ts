@@ -35,7 +35,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                 this.toastr.error(
                   error.statusText === 'OK' ? 'Bad Request' : error.statusText,
                   error.status
-                ); //Because navegator shows OK status text instead of bad request
+                );
               }
               break;
 
