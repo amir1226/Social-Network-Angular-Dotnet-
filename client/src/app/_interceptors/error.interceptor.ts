@@ -31,11 +31,10 @@ export class ErrorInterceptor implements HttpInterceptor {
                   }
                 }
                 throw modalStateErrors.flat();
+              } else if (typeof error.error === 'object') {
+                this.toastr.error(error.statusText, error.status);
               } else {
-                this.toastr.error(
-                  error.statusText === 'OK' ? 'Bad Request' : error.statusText,
-                  error.status
-                );
+                this.toastr.error(error.error, error.status);
               }
               break;
 
@@ -43,7 +42,7 @@ export class ErrorInterceptor implements HttpInterceptor {
               this.toastr.error(
                 error.statusText === 'OK' ? 'Unauthorized' : error.statusText,
                 error.status
-              ); //Because navegator shows OK status text instead of bad unauthorized
+              );
               break;
             case 404:
               this.router.navigateByUrl('/not-found');
