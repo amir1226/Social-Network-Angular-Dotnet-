@@ -21,7 +21,7 @@
                 <span
                   class="text-danger"
                   *ngIf="
-                    !message.dateRead && message.senderUsername !== username
+                    !message.dateread && message.senderUsername !== username
                   "
                 >
                   (unread)
@@ -29,10 +29,10 @@
                 <span
                   class="text-success"
                   *ngIf="
-                    message.dateRead && message.senderUsername !== username
+                    message.dateread && message.senderUsername !== username
                   "
                 >
-                  (read) {{ message.dateRead | timeago }}
+                  (read) {{ message.dateread | timeago }}
                 </span>
               </small>
             </div>
