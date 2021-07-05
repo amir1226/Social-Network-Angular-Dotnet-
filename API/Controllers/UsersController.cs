@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    [Authorize]
+
     public class UsersController : BaseApiController
     {
         private readonly IMapper _mapper;
@@ -45,7 +45,6 @@ namespace API.Controllers
             return Ok(users);
         }
 
-        [Authorize(Roles = "Member")]
         [HttpGet("{username}", Name ="GetUser")]
         public async Task<ActionResult<MemberDto>> GetUser(string username)
         {
