@@ -1,60 +1,73 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-test-errors',
   templateUrl: './test-errors.component.html',
-  styleUrls: ['./test-errors.component.css']
+  styleUrls: ['./test-errors.component.css'],
 })
 export class TestErrorsComponent implements OnInit {
-  baseUrl = 'https://localhost:5001/api/'
-  validationErrors : string[] = []
+  baseUrl = environment.apiUrl;
+  validationErrors: string[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
+  get404Error() {
+    this.http.get(this.baseUrl + 'buggy/not-found').subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
 
-  get404Error(){
-    this.http.get(this.baseUrl + 'buggy/not-found').subscribe(response =>{
-      console.log(response)
-    }, error =>{
-      console.error(error)
-    })
+  get400Error() {
+    this.http.get(this.baseUrl + 'buggy/bad-request').subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
 
-  get400Error(){
-    this.http.get(this.baseUrl + 'buggy/bad-request').subscribe(response =>{
-      console.log(response)
-    }, error =>{
-      console.error(error)
-    })
+  get500Error() {
+    this.http.get(this.baseUrl + 'buggy/server-error').subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
 
-  get500Error(){
-    this.http.get(this.baseUrl + 'buggy/server-error').subscribe(response =>{
-      console.log(response)
-    }, error =>{
-      console.error(error)
-    })
+  get401Error() {
+    this.http.get(this.baseUrl + 'buggy/auth').subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
 
-  get401Error(){
-    this.http.get(this.baseUrl + 'buggy/auth').subscribe(response =>{
-      console.log(response)
-    }, error =>{
-      console.error(error)
-    })
+  get400ValidationError() {
+    this.http.post(this.baseUrl + 'account/register', {}).subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.error(error);
+        this.validationErrors = error;
+      }
+    );
   }
-
-  get400ValidationError(){
-    this.http.post(this.baseUrl + 'account/register',{}).subscribe(response =>{
-      console.log(response)
-    }, error =>{
-      console.error(error)
-      this.validationErrors = error
-    })
-  }
-
 }
